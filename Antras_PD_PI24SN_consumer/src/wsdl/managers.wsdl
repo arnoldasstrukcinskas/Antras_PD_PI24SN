@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="https://spring.io/guides/gs-producing-web-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="https://spring.io/guides/gs-producing-web-service" targetNamespace="https://spring.io/guides/gs-producing-web-service">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://spring.io/guides/gs-producing-web-service">
+
+    <xs:element name="loginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="loginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="registerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="registerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getFromXmlByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="droneName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getFromXmlByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="done" type="tns:droneSOAP"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="sellDroneRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="droneName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="sellDroneResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="drone" type="tns:droneSOAP"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="moveDronesFromXmlToDbRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="moveDronesFromXmlToDbResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="drones" type="tns:droneSOAP"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createDroneInDbRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="droneName" type="xs:string"/>
+                <xs:element name="batteryCapacity" type="xs:integer"/>
+                <xs:element name="price" type="xs:double"/>
+                <xs:element name="droneNew" type="xs:boolean"/>
+                <xs:element name="frameShape">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:length value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="autonomous" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createDroneInDbResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="drone" type="tns:droneSOAP"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateDroneInDbRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="droneName" type="xs:string"/>
+                <xs:element name="newName" type="xs:string"/>
+                <xs:element name="price" type="xs:double"/>
+                <xs:element name="batteryCapacity" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateDroneInDbResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="drone" type="tns:droneSOAP"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteDroneFromDbRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="droneName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteDroneFromDbResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="drone" type="tns:droneSOAP"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getManagersRequest">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getManagersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="manager" type="tns:managerSOAP"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createPdfFileRequest">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createPdfFileResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="managerSOAP">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="accountNumber" type="xs:integer"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="drone" type="tns:droneSOAP"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="droneSOAP">
+        <xs:sequence>
+            <xs:element name="droneName" type="xs:string"/>
+            <xs:element name="price" type="xs:double"/>
+            <xs:element name="batteryCapacity" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="moveDronesFromXmlToDbResponse">
+    <wsdl:part element="tns:moveDronesFromXmlToDbResponse" name="moveDronesFromXmlToDbResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getFromXmlByNameResponse">
+    <wsdl:part element="tns:getFromXmlByNameResponse" name="getFromXmlByNameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sellDroneResponse">
+    <wsdl:part element="tns:sellDroneResponse" name="sellDroneResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createPdfFileRequest">
+    <wsdl:part element="tns:createPdfFileRequest" name="createPdfFileRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getFromXmlByNameRequest">
+    <wsdl:part element="tns:getFromXmlByNameRequest" name="getFromXmlByNameRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteDroneFromDbResponse">
+    <wsdl:part element="tns:deleteDroneFromDbResponse" name="deleteDroneFromDbResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getManagersRequest">
+    <wsdl:part element="tns:getManagersRequest" name="getManagersRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteDroneFromDbRequest">
+    <wsdl:part element="tns:deleteDroneFromDbRequest" name="deleteDroneFromDbRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginRequest">
+    <wsdl:part element="tns:loginRequest" name="loginRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="moveDronesFromXmlToDbRequest">
+    <wsdl:part element="tns:moveDronesFromXmlToDbRequest" name="moveDronesFromXmlToDbRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createPdfFileResponse">
+    <wsdl:part element="tns:createPdfFileResponse" name="createPdfFileResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateDroneInDbRequest">
+    <wsdl:part element="tns:updateDroneInDbRequest" name="updateDroneInDbRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginResponse">
+    <wsdl:part element="tns:loginResponse" name="loginResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getManagersResponse">
+    <wsdl:part element="tns:getManagersResponse" name="getManagersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sellDroneRequest">
+    <wsdl:part element="tns:sellDroneRequest" name="sellDroneRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateDroneInDbResponse">
+    <wsdl:part element="tns:updateDroneInDbResponse" name="updateDroneInDbResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createDroneInDbRequest">
+    <wsdl:part element="tns:createDroneInDbRequest" name="createDroneInDbRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registerResponse">
+    <wsdl:part element="tns:registerResponse" name="registerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registerRequest">
+    <wsdl:part element="tns:registerRequest" name="registerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createDroneInDbResponse">
+    <wsdl:part element="tns:createDroneInDbResponse" name="createDroneInDbResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ManagersPort">
+    <wsdl:operation name="moveDronesFromXmlToDb">
+      <wsdl:input message="tns:moveDronesFromXmlToDbRequest" name="moveDronesFromXmlToDbRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:moveDronesFromXmlToDbResponse" name="moveDronesFromXmlToDbResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFromXmlByName">
+      <wsdl:input message="tns:getFromXmlByNameRequest" name="getFromXmlByNameRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getFromXmlByNameResponse" name="getFromXmlByNameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sellDrone">
+      <wsdl:input message="tns:sellDroneRequest" name="sellDroneRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:sellDroneResponse" name="sellDroneResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createPdfFile">
+      <wsdl:input message="tns:createPdfFileRequest" name="createPdfFileRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createPdfFileResponse" name="createPdfFileResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteDroneFromDb">
+      <wsdl:input message="tns:deleteDroneFromDbRequest" name="deleteDroneFromDbRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteDroneFromDbResponse" name="deleteDroneFromDbResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getManagers">
+      <wsdl:input message="tns:getManagersRequest" name="getManagersRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getManagersResponse" name="getManagersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdl:input message="tns:loginRequest" name="loginRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:loginResponse" name="loginResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateDroneInDb">
+      <wsdl:input message="tns:updateDroneInDbRequest" name="updateDroneInDbRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateDroneInDbResponse" name="updateDroneInDbResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createDroneInDb">
+      <wsdl:input message="tns:createDroneInDbRequest" name="createDroneInDbRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createDroneInDbResponse" name="createDroneInDbResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="register">
+      <wsdl:input message="tns:registerRequest" name="registerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:registerResponse" name="registerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ManagersPortSoap11" type="tns:ManagersPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="moveDronesFromXmlToDb">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="moveDronesFromXmlToDbRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="moveDronesFromXmlToDbResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFromXmlByName">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getFromXmlByNameRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getFromXmlByNameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sellDrone">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="sellDroneRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sellDroneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createPdfFile">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createPdfFileRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createPdfFileResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteDroneFromDb">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deleteDroneFromDbRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteDroneFromDbResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getManagers">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getManagersRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getManagersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="loginRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loginResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateDroneInDb">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateDroneInDbRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateDroneInDbResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createDroneInDb">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createDroneInDbRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createDroneInDbResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="register">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="registerRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ManagersPortService">
+    <wsdl:port binding="tns:ManagersPortSoap11" name="ManagersPortSoap11">
+      <soap:address location="/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

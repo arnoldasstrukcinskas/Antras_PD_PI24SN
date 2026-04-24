@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<managers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="managers.xsd">
+    <manager>
+        <id>1</id>
+        <accountNumber>16927267412019239773</accountNumber>
+        <username>admin</username>
+        <password></password>
+        <soldDrones>
+            <drone>
+                <droneName>AeroFalcon-X1</droneName>
+                <batteryCapacity>5200</batteryCapacity>
+                <price>1475.2</price>
+                <droneNew>true</droneNew>
+                <framsShape>X</framsShape>
+                <isAutonomus>true</isAutonomus>
+            </drone>
+            <drone>
+                <droneName>StormWing-B3</droneName>
+                <batteryCapacity>5800</batteryCapacity>
+                <price>1589.99</price>
+                <droneNew>true</droneNew>
+                <framsShape>H</framsShape>
+                <isAutonomus>true</isAutonomus>
+            </drone>
+        </soldDrones>
+    </manager>
+    <manager>
+        <id>1</id>
+        <accountNumber>9763655703101446663</accountNumber>
+        <username>aa</username>
+        <password></password>
+        <soldDrones/>
+    </manager>
+</managers>
